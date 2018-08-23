@@ -23,4 +23,10 @@ public class HibernateUtilities {
 		  }
 		}
 
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
+	
+
 }
