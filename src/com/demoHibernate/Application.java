@@ -1,5 +1,7 @@
 package com.demoHibernate;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 
 public class Application {
@@ -10,7 +12,9 @@ public class Application {
 		session.beginTransaction();
 		User user = new User();
 		user.setName("Pratik");
-		user.getProteinData().setGoal(50);
+		user.getHistory().add(new UserHistory(new Date(), "Set Name to Pratik"));
+		user.getProteinData().setGoal(250);
+		user.getHistory().add(new UserHistory(new Date(), "Set Goal to 250 protein"));
 		session.save(user);
 		session.getTransaction().commit();
 		
@@ -19,7 +23,13 @@ public class Application {
 		System.out.println(loadUser.getName());
 		System.out.println(loadUser.getProteinData().getGoal());
 		
-		loadUser.getProteinData().setGoal(loadUser.getProteinData().getGoal()+100);
+		loadUser.getProteinData().setGoal(loadUser.getProteinData().getGoal()+50);
+		loadUser.getHistory().add(new UserHistory(new Date(), "Added 50 protein"));
+		
+		for(UserHistory history : loadUser.getHistory())
+		{
+			System.out.println(history.getEntryTime().toString() + "  " + history.getEntry());
+		}
 		
 		session.getTransaction().commit();
 		
