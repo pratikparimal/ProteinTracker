@@ -1,7 +1,7 @@
 package com.demoHibernate;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
@@ -10,7 +10,7 @@ public class User {
 	
 	private ProteinData proteinData= new ProteinData();
 	
-	private Set<UserHistory> history = new HashSet<UserHistory>();
+	private Map<String, UserHistory> history = new HashMap<String, UserHistory>();
 	
 	public int getId() {
 		return id;
@@ -30,10 +30,10 @@ public class User {
 	public void setProteinData(ProteinData proteinData) {
 		this.proteinData = proteinData;
 	}
-	public Set<UserHistory> getHistory() {
+	public Map<String, UserHistory> getHistory() {
 		return history;
 	}
-	public void setHistory(Set<UserHistory> history) {
+	public void setHistory(Map<String, UserHistory> history) {
 		this.history = history;
 	}
 	
