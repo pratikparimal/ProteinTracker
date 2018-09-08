@@ -6,11 +6,9 @@
     <class name="com.demoHibernate.ProteinData" table="PROTEINDATA">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="foreign" >
-            	<param name="property">user</param>
-            </generator>
+            <generator class="increment" />
         </id>
-        <one-to-one name="user" class="com.demoHibernate.User" constrained="true"/>
+        <one-to-one name="user" class="com.demoHibernate.User" property-ref="proteinData"/>
         <property name="total" type="int">
             <column name="TOTAL" />
         </property>

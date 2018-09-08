@@ -32,6 +32,8 @@ public class Application {
 		loadUser.getProteinData().setGoal(loadUser.getProteinData().getGoal()+50);
 		loadUser.addHistory(new UserHistory(new Date(), "Added 50 protein"));
 		
+		user.setProteinData(new ProteinData());
+		
 		session.getTransaction().commit();
 		
 		session.close();
