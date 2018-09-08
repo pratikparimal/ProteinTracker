@@ -1,7 +1,6 @@
 package com.demoHibernate;
 
 import java.util.Date;
-import java.util.Map.Entry;
 
 import org.hibernate.Session;
 
@@ -13,9 +12,9 @@ public class Application {
 		session.beginTransaction();
 		User user = new User();
 		user.setName("Pratik");
-		user.getHistory().put("PT001", new UserHistory(new Date(), "Set Name to Pratik"));
+		user.addHistory(new UserHistory(new Date(), "Set Name to Pratik"));
 		user.getProteinData().setGoal(250);
-		user.getHistory().put("PT002", new UserHistory(new Date(), "Set Goal to 250 protein"));
+		user.addHistory(new UserHistory(new Date(), "Set Goal to 250 protein"));
 		session.save(user);
 		session.getTransaction().commit();
 		
@@ -24,14 +23,14 @@ public class Application {
 		System.out.println(loadUser.getName());
 		System.out.println(loadUser.getProteinData().getGoal());
 		
-		loadUser.getProteinData().setGoal(loadUser.getProteinData().getGoal()+50);
-		loadUser.getHistory().put("PT003", new UserHistory(new Date(), "Added 50 protein"));
 		
-		for(Entry<String, UserHistory> history : loadUser.getHistory().entrySet())
+		for(UserHistory history : loadUser.getHistory())
 		{
-			System.out.println("Key Value: " + history.getKey());
-			System.out.println(history.getValue().getEntryTime().toString() + "  " + history.getValue().getEntry());
+			System.out.println(history.getEntryTime().toString() + "  " + history.getEntry());
 		}
+		
+		loadUser.getProteinData().setGoal(loadUser.getProteinData().getGoal()+50);
+		loadUser.addHistory(new UserHistory(new Date(), "Added 50 protein"));
 		
 		session.getTransaction().commit();
 		
